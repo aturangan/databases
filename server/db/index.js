@@ -19,39 +19,8 @@ connection.connect(function(err){
   }
 });
 
-var getMessages = function(callback) {
-  var queryString = 'select * from messages';
-  connection.query(queryString, function(err, data) {
-    if (err) {
-      console.log('could not get data from database');
-      callback(err, null)
-    } else {
-      console.log('this is our data' , data);
-      callback(null, data)
-    }
-  });
-} 
-
-var postMessages = function(data, callback) {
-  console.log('THIS IS THE DATA', data); 
-  
-  var queryString = 'INSERT INTO messages(id, username, messages, roomname) VALUES ('+ data.id + ',' + data.username + ',' + data.messages + ',' + data.roomname + ')'; 
-  connection.query(queryString, function(err, data) {
-    if (err) {
-      console.log('could not post data to database'); 
-      callback(err, null); 
-    } else {
-      console.log('posted data to database');
-      callback(null, data); 
-    }
-  });
-}
-//INSERT INTO tbl(`v1`, `v2`) VALUES ("bla", "bla");  
-
-
 // connect to your database
 module.exports = {
-  getMessages: getMessages,
-  postMessages: postMessages
+  connection: connection,
 }
 

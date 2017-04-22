@@ -3,48 +3,37 @@ var db = require('../db');
 
 module.exports = {
   messages: {
-    get: function () {
-      //call get messages
-      db.getMessages(function(err, data) {
+    get: function (callback) {
+      var queryString = 'select * from messages';
+      db.connection.query(queryString, function(err, data) {
         if (err) {
-          console.log(err); 
+          console.log('could not get data from database');
+          callback(err, null)
         } else {
-          console.log('dataaaa', data); 
+          console.log('this is our data' , data);
+          callback(null, data)
         }
-      })
+      });
     }, // a function which produces all the messages
-    post: function (messageFromForm) {
-      db.postMessages(messageFromForm, function(err, data) {
+    post: function (messageFromForm, callback) {
+      var message = [ messageFromForm.id, messageFromForm.username, messageFromForm.messages, messageFromForm.roomname];
+      var queryString = 'INSERT INTO messages(id, username, messages, roomname) VALUES (?, ?, ?, ?)'; 
+      db.connection.query(queryString, message, function(err, data) {
         if (err) {
-          console.log(err); 
+          console.log('could not post data to database'); 
+          callback(err, null); 
         } else {
-          console.log('successful'); 
+          console.log('posted data to database');
+          callback(null, data); 
         }
-      })
-
-     // a function which can be used to insert a message into the database
-  },
-
-  users: {
-    // Ditto as above.
-    get: function () {},
-    post: function () {}
+      });
+    },
+    users: {
+      // Ditto as above.
+      get: function () {},
+      post: function () {}
+    }
   }
-}
-}
+};
 
-var obj = {
-  id: 2, 
-  username: 'bob', 
-  roomname: '6th floor',
-  messages: 'hello'
-}
-module.exports.messages.post(obj); 
-
-// var post  = {id: 1, title: 'Hello MySQL'};
-// var query = connection.query('INSERT INTO posts SET ?', post, function (error, results, fields) {
-//   if (error) throw error;
-//   // Neat!
-// });
-// console.log(query.sql); // INSERT INTO posts SET `id` = 1, `title` = 'Hello MySQL'
-
+ 

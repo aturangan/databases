@@ -4,14 +4,14 @@ CREATE DATABASE chat;
 USE chat;
 
 CREATE TABLE messages (
-  id int primary key not null, 
+  id int primary key not null AUTO_INCREMENT, 
   username char(255), 
   messages char(255), 
   roomname char(255)
 );
 
 
-INSERT INTO messages (id, username, messages, roomname) VALUES (1, 'alana', 'this is working', 'lobby');
+INSERT INTO messages ( username, messages, roomname) VALUES ( 'alana', 'this is working', 'lobby');
 /* Create other tables and define schemas for them here! */
 
 

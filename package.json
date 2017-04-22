@@ -17,7 +17,7 @@
     "lint": "eslint ./"
   },
   "dependencies": {
-    "body-parser": "^1.9.2",
+    "body-parser": "^1.17.1",
     "express": "^4.10.1",
     "morgan": "^1.4.1",
     "mysql": "^2.4.2",
