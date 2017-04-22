@@ -1,5 +1,16 @@
 var express = require('express');
 var db = require('./db');
+var mysql = require('mysql');
+
+
+// db.connection.connect(function(err){
+// 	if (err) {
+// 		console.log('the database is not connected ', err);
+// 	} else {
+//     console.log('the database is connected');
+//   }
+// })
+
 
 // Middleware
 var morgan = require('morgan');
